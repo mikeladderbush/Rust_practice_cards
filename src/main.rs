@@ -11,7 +11,7 @@ struct Player {
 
 impl Player{
 
-    fn initialize_hand(&mut self){
+    fn initialize_blackjack_hand(&mut self){
 
         self.hand.push(create_card());
         self.hand.push(create_card());
@@ -93,8 +93,8 @@ fn main() {
 
         };
 
-        player1.initialize_hand();
-        dealer.initialize_hand();
+        player1.initialize_blackjack_hand();
+        dealer.initialize_blackjack_hand();
 
         println!("{:?}", player1);
         println!("{:?}", dealer);
