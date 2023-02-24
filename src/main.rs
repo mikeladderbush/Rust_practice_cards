@@ -4,6 +4,7 @@ use rand::Rng; // 0.8.5
 struct Player {
 
     hand: Vec<(String, String, u32)>,
+    hand_total_value: u32,
     wager: Option<u32>,
     hands_played: Option<u32>
 
@@ -11,24 +12,37 @@ struct Player {
 
 impl Player{
 
-    fn initialize_blackjack_hand(&mut self){
-
-        self.hand.push(create_card());
-        self.hand.push(create_card());
+    fn initialize_hand(&mut self){
+       
+        let card_1 = create_card();
+        let card_2 = create_card();
+        self.hand_total_value = self.hand_total_value + card_1.2;
+        self.hand_total_value = self.hand_total_value + card_2.2;
+        self.hand.push(card_1);
+        self.hand.push(card_2);
 
     }
 
     fn add_to_hand(&mut self){
 
-        self.hand.push(create_card());
+        let added_card = create_card();
+        self.hand_total_value = self.hand_total_value + &added_card.2;
+        self.hand.push(added_card);
+       
+        if self.hand_total_value > 21 {
+            println!("You busted");
+            println!("{:?}", self);
+        }else {
+            println!("hit or stay?");
+            println!("{:?}", self);
+        }
 
     }
-
 }
 
 fn create_card() -> (String, String, u32) {
 
-    let mut single_deck: Vec<(u32, &str)> = 
+    let mut single_deck: Vec<(u32, &str)> =
     vec![(1,"Hearts"),(1,"Spades"),(1,"Clubs"),(1,"Diamonds"),(2,"Hearts"),(2,"Spades")
     ,(2,"Clubs"),(2,"Diamonds"),(3,"Hearts"),(3,"Spades"),(3,"Clubs"),(3,"Diamonds")
     ,(4,"Hearts"),(4,"Spades"),(4,"Clubs"),(4,"Diamonds"),(5,"Hearts"),(5,"Spades")
@@ -40,7 +54,7 @@ fn create_card() -> (String, String, u32) {
     ,(13,"Spades"),(13,"Clubs"),(13,"Diamonds")];
 
     let mut rng = rand::thread_rng();
-    let random_selection = single_deck.remove(rng.gen_range(0..single_deck.len())); 
+    let random_selection = single_deck.remove(rng.gen_range(0..single_deck.len()));
     let mut card_number: u32 = random_selection.0;
     let mut card_number_appearance: String = random_selection.0.to_string();
 
@@ -80,6 +94,7 @@ fn main() {
         let mut player1 = Player {
 
             hand: first_hand,
+            hand_total_value: 0,
             hands_played: Some(1),
             wager: Some(50)
 
@@ -88,15 +103,20 @@ fn main() {
         let mut dealer = Player {
 
             hand: second_hand,
+            hand_total_value: 0,
             hands_played: None,
             wager: None
 
         };
 
-        player1.initialize_blackjack_hand();
-        dealer.initialize_blackjack_hand();
+        player1.initialize_hand();
+        dealer.initialize_hand();
 
         println!("{:?}", player1);
         println!("{:?}", dealer);
+       
+        //implement buttons to hit, stay, split etc.
+       
+        player1.add_to_hand();
 
 }
