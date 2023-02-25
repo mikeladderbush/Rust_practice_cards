@@ -1,4 +1,7 @@
+use fltk::frame::Frame;
 use rand::Rng; // 0.8.5
+use fltk::{app, prelude::*, window::Window};
+use fltk::{button::Button, prelude::*};
 
 #[derive(Debug)]
 struct Player {
@@ -85,38 +88,34 @@ fn create_card() -> (String, String, u32) {
 
 }
 
-
 fn main() {
 
     let first_hand = vec![];
     let second_hand = vec![];
 
-        let mut player1 = Player {
+    let mut player1 = Player {
 
-            hand: first_hand,
-            hand_total_value: 0,
-            hands_played: Some(1),
-            wager: Some(50)
+        hand: first_hand,
+        hand_total_value: 0,
+        hands_played: Some(1),
+        wager: Some(50)
 
-        };
+    };
 
-        let mut dealer = Player {
+    let mut dealer = Player {
 
-            hand: second_hand,
-            hand_total_value: 0,
-            hands_played: None,
-            wager: None
+        hand: second_hand,
+        hand_total_value: 0,
+        hands_played: None,
+        wager: None
 
-        };
+    };
 
-        player1.initialize_hand();
-        dealer.initialize_hand();
-
-        println!("{:?}", player1);
-        println!("{:?}", dealer);
-       
-        //implement buttons to hit, stay, split etc.
-       
-        player1.add_to_hand();
-
+    let app = app::App::default();
+    let mut wind = Window::new(600, 200, 300, 300, "Card Game");
+    let mut but1 = Button::new(10, 10, 80, 40, "Start Game");
+    wind.end();
+    wind.show();
+    but1.set_callback(move |_| wind.set_label("Hello World!"));
+    app.run().unwrap();
 }
