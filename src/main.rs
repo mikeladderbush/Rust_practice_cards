@@ -1,9 +1,7 @@
-use fltk::frame::Frame;
+use fltk::{app, window::Window, group::Pack, button::Button, frame::Frame, prelude::{WidgetExt, GroupExt}};
 use rand::Rng; // 0.8.5
-use fltk::{app, prelude::*, window::Window};
-use fltk::{button::Button, prelude::*};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Player {
 
     hand: Vec<(String, String, u32)>,
@@ -11,6 +9,12 @@ struct Player {
     wager: Option<u32>,
     hands_played: Option<u32>
 
+}
+
+#[derive(Debug, Clone, Copy)]
+pub enum Message {
+    Start,
+    Restart,
 }
 
 impl Player{
@@ -88,34 +92,33 @@ fn create_card() -> (String, String, u32) {
 
 }
 
-fn main() {
-
-    let first_hand = vec![];
-    let second_hand = vec![];
-
-    let mut player1 = Player {
-
-        hand: first_hand,
-        hand_total_value: 0,
-        hands_played: Some(1),
-        wager: Some(50)
-
-    };
-
-    let mut dealer = Player {
-
-        hand: second_hand,
-        hand_total_value: 0,
-        hands_played: None,
-        wager: None
-
-    };
-
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app = app::App::default();
-    let mut wind = Window::new(600, 200, 300, 300, "Card Game");
-    let mut but1 = Button::new(10, 10, 80, 40, "Start Game");
+    let mut wind = Window::default().with_size(600, 200).with_label("Card Game");
+    let mut pack = Pack::default().with_size(120, 140).center_of(&wind);
+    pack.set_spacing(10);
+    let mut but_start = Button::default().with_size(100, 40).with_label("Start Game");
+    let mut but_restart = Button::default().with_size(100, 40).with_label("Restart Game");
+    let mut frame = Frame::default().with_size(0, 40).with_label("0");
+    pack.end();
     wind.end();
     wind.show();
-    but1.set_callback(move |_| wind.set_label("Hello World!"));
-    app.run().unwrap();
+
+    let (s, r) = app::channel::<Message>();
+
+    but_start.emit(s, Message::Start);
+    but_restart.emit(s, Message::Restart);
+
+    //now that we have somewhat working buttons I'm going to connect the initialization of hands to the buttons.
+    while app.wait() {
+        let label: i32 = frame.label().parse()?;
+
+        if let Some(msg) = r.recv() {
+            match msg {
+                Message::Start => frame.set_label(&(label + 1).to_string()),
+                Message::Restart => frame.set_label(&(label - 1).to_string()),
+            }
+        }
+    }
+    Ok(())
 }
