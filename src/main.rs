@@ -1,4 +1,4 @@
-use fltk::{app, window::Window, group::Pack, button::Button, frame::Frame, prelude::{WidgetExt, GroupExt}};
+use fltk::{app, window::Window, group::Pack, button::Button, prelude::{WidgetExt, GroupExt}, frame::Frame};
 use rand::Rng; // 0.8.5
 
 #[derive(Debug, Clone)]
@@ -13,8 +13,10 @@ struct Player {
 
 #[derive(Debug, Clone, Copy)]
 pub enum Message {
+
     Start,
     Restart,
+
 }
 
 impl Player{
@@ -28,6 +30,12 @@ impl Player{
         self.hand.push(card_1);
         self.hand.push(card_2);
 
+        let mut frame = Frame::default().with_size(0, 40).with_label("0");
+        let mut label: i32 = frame.label().parse().unwrap();
+        frame.set_label(&(label + 1).to_string());
+
+        println!("{:?}", self);
+
     }
 
     fn add_to_hand(&mut self){
@@ -37,12 +45,25 @@ impl Player{
         self.hand.push(added_card);
        
         if self.hand_total_value > 21 {
+
             println!("You busted");
             println!("{:?}", self);
+
         }else {
+
             println!("hit or stay?");
             println!("{:?}", self);
+
         }
+
+    }
+
+    fn reset_hand(&mut self){
+
+        self.hand = vec![];
+        self.hand_total_value = 0;
+        self.wager = Some(0);
+        self.hands_played = Some(0 + 1);
 
     }
 }
@@ -93,13 +114,13 @@ fn create_card() -> (String, String, u32) {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+
     let app = app::App::default();
     let mut wind = Window::default().with_size(600, 200).with_label("Card Game");
     let mut pack = Pack::default().with_size(120, 140).center_of(&wind);
     pack.set_spacing(10);
     let mut but_start = Button::default().with_size(100, 40).with_label("Start Game");
     let mut but_restart = Button::default().with_size(100, 40).with_label("Restart Game");
-    let mut frame = Frame::default().with_size(0, 40).with_label("0");
     pack.end();
     wind.end();
     wind.show();
@@ -109,14 +130,24 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     but_start.emit(s, Message::Start);
     but_restart.emit(s, Message::Restart);
 
-    //now that we have somewhat working buttons I'm going to connect the initialization of hands to the buttons.
+    let mut player1 = Player {
+
+        hand: vec![],
+        hand_total_value: 0,
+        wager: Some(0),
+        hands_played: Some(0),
+
+    };
+
     while app.wait() {
-        let label: i32 = frame.label().parse()?;
 
         if let Some(msg) = r.recv() {
+
             match msg {
-                Message::Start => frame.set_label(&(label + 1).to_string()),
-                Message::Restart => frame.set_label(&(label - 1).to_string()),
+
+                Message::Start => player1.initialize_hand(),
+                Message::Restart => player1.reset_hand(),
+
             }
         }
     }
