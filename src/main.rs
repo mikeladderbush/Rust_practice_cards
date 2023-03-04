@@ -1,6 +1,7 @@
-use std::usize;
+use core::num;
+use std::io;
 
-use fltk::{app, window::Window, group::Pack, button::Button, prelude::{WidgetExt, GroupExt}, frame::Frame, input};
+use fltk::{app, window::Window, group::Pack, button::Button, prelude::{WidgetExt, GroupExt}};
 use rand::Rng; // 0.8.5
 
 #[derive(Debug, Clone)]
@@ -8,9 +9,9 @@ struct Player {
 
     hand: Vec<(String, String, u32)>,
     hand_total_value: u32,
-    wager: Option<u32>,
+    wager: Option<usize>,
     hands_played: Option<u32>,
-    player_id: usize,
+    name: String
 
 }
 
@@ -18,9 +19,8 @@ struct Player {
 pub enum Message {
 
     Start,
-    AddOne,
     AddPlayer,
-    Restart,
+    HitMe
 
 }
 
@@ -34,8 +34,6 @@ impl Player{
         self.hand_total_value = self.hand_total_value + card_2.2;
         self.hand.push(card_1);
         self.hand.push(card_2);
-
-        let mut frame = Frame::default().with_size(0, 40).with_label("0");
 
         println!("{:?}", self);
 
@@ -54,7 +52,6 @@ impl Player{
 
         }else {
 
-            println!("hit or stay?");
             println!("{:?}", self);
 
         }
@@ -108,31 +105,44 @@ fn create_card() -> (String, String, u32) {
 
 }
 
-fn create_player(i: usize) {
+fn create_game(){
 
-    let mut n = 0;
+    let dealer_name = "Dealer".to_string();
 
-    while n < i {
+    println!("please enter a name for your player: ");
+    let mut player_name: String = String::new();
+    io::stdin().read_line(&mut player_name).expect("failed to readline");
 
-        let mut player = Player {
+    println!("please enter your wager: ");
+    let mut wager = String::new();
+    io::stdin().read_line(&mut wager).expect("failed to readline");
 
-            hand: vec![],
-            hand_total_value: 0,
-            wager: Some(0),
-            hands_played: Some(0),
-            player_id: n
+
+    let mut dealer  = Player {
+
+        hand: vec![],
+        hand_total_value: 0,
+        wager: None,
+        hands_played: None,
+        name: dealer_name,
     
-        };
+    };
 
-        player.initialize_hand();
-        n = n + 1;
+    let mut player = Player {
 
-    }
+        hand: vec![],
+        hand_total_value: 0,
+        wager: Some(wager.trim().parse().unwrap()),
+        hands_played: None,
+        name: player_name,
+
+    };
+
+    dealer.initialize_hand();
+    player.initialize_hand();
+
 }
 
-fn add_to_counter() {
-    
-}
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 
@@ -140,10 +150,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut wind = Window::default().with_size(600, 200).with_label("Card Game");
     let mut pack = Pack::default().with_size(120, 140).center_of(&wind);
     pack.set_spacing(10);
-    let mut but_starting_players = Button::default().with_size(100, 40).with_label("Starting Players");
     let mut but_start = Button::default().with_size(100, 40).with_label("Start Game");
     let mut but_add_player = Button::default().with_size(100,40).with_label("Add Player");
-    let mut but_restart = Button::default().with_size(100, 40).with_label("Restart Game");
+    let mut but_hit_me = Button::default().with_size(100, 40).with_label("Hit me!");
     pack.end();
     wind.end();
     wind.show();
@@ -151,13 +160,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (s, r) = app::channel::<Message>();
 
     but_start.emit(s, Message::Start);
-    but_starting_players.emit(s, Message::AddOne);
     but_add_player.emit(s, Message::AddPlayer);
-    but_restart.emit(s, Message::Restart);
-
-    let mut count = String::new();
-    println!("Please enter the number of players, more can be added later");
-    let player_count = std::io::stdin().read_line(&mut count).unwrap();
+    but_hit_me.emit(s, Message::HitMe);
 
     while app.wait() {
 
@@ -165,10 +169,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             match msg {
 
-                Message::Start => create_player(player_count),
-                Message::AddOne => add_to_counter(),
-                Message::AddPlayer => create_player(1),
-                Message::Restart => todo!(),
+                Message::Start => create_game(),
+                Message::AddPlayer => todo!(),
+                Message::HitMe => todo!(),
 
             }
         }
