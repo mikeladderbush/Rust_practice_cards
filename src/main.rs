@@ -1,4 +1,6 @@
-use fltk::{app, window::Window, group::Pack, button::Button, prelude::{WidgetExt, GroupExt}, frame::Frame};
+use std::usize;
+
+use fltk::{app, window::Window, group::Pack, button::Button, prelude::{WidgetExt, GroupExt}, frame::Frame, input};
 use rand::Rng; // 0.8.5
 
 #[derive(Debug, Clone)]
@@ -7,7 +9,8 @@ struct Player {
     hand: Vec<(String, String, u32)>,
     hand_total_value: u32,
     wager: Option<u32>,
-    hands_played: Option<u32>
+    hands_played: Option<u32>,
+    player_id: usize,
 
 }
 
@@ -15,6 +18,8 @@ struct Player {
 pub enum Message {
 
     Start,
+    AddOne,
+    AddPlayer,
     Restart,
 
 }
@@ -31,8 +36,6 @@ impl Player{
         self.hand.push(card_2);
 
         let mut frame = Frame::default().with_size(0, 40).with_label("0");
-        let mut label: i32 = frame.label().parse().unwrap();
-        frame.set_label(&(label + 1).to_string());
 
         println!("{:?}", self);
 
@@ -58,14 +61,6 @@ impl Player{
 
     }
 
-    fn reset_hand(&mut self){
-
-        self.hand = vec![];
-        self.hand_total_value = 0;
-        self.wager = Some(0);
-        self.hands_played = Some(0 + 1);
-
-    }
 }
 
 fn create_card() -> (String, String, u32) {
@@ -113,13 +108,41 @@ fn create_card() -> (String, String, u32) {
 
 }
 
+fn create_player(i: usize) {
+
+    let mut n = 0;
+
+    while n < i {
+
+        let mut player = Player {
+
+            hand: vec![],
+            hand_total_value: 0,
+            wager: Some(0),
+            hands_played: Some(0),
+            player_id: n
+    
+        };
+
+        player.initialize_hand();
+        n = n + 1;
+
+    }
+}
+
+fn add_to_counter() {
+    
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let app = app::App::default();
     let mut wind = Window::default().with_size(600, 200).with_label("Card Game");
     let mut pack = Pack::default().with_size(120, 140).center_of(&wind);
     pack.set_spacing(10);
+    let mut but_starting_players = Button::default().with_size(100, 40).with_label("Starting Players");
     let mut but_start = Button::default().with_size(100, 40).with_label("Start Game");
+    let mut but_add_player = Button::default().with_size(100,40).with_label("Add Player");
     let mut but_restart = Button::default().with_size(100, 40).with_label("Restart Game");
     pack.end();
     wind.end();
@@ -128,16 +151,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (s, r) = app::channel::<Message>();
 
     but_start.emit(s, Message::Start);
+    but_starting_players.emit(s, Message::AddOne);
+    but_add_player.emit(s, Message::AddPlayer);
     but_restart.emit(s, Message::Restart);
 
-    let mut player1 = Player {
-
-        hand: vec![],
-        hand_total_value: 0,
-        wager: Some(0),
-        hands_played: Some(0),
-
-    };
+    let mut count = String::new();
+    println!("Please enter the number of players, more can be added later");
+    let player_count = std::io::stdin().read_line(&mut count).unwrap();
 
     while app.wait() {
 
@@ -145,8 +165,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             match msg {
 
-                Message::Start => player1.initialize_hand(),
-                Message::Restart => player1.reset_hand(),
+                Message::Start => create_player(player_count),
+                Message::AddOne => add_to_counter(),
+                Message::AddPlayer => create_player(1),
+                Message::Restart => todo!(),
 
             }
         }
