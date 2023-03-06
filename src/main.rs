@@ -31,6 +31,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     but_stay.emit(s, Message::Stay);
     but_hit_me.emit(s, Message::HitMe);
 
+    but_stay.hide();
+    but_hit_me.hide();
+
     let player = Player::default();
     let dealer = Player::default();
     let mut starting_players: (Player, Player) = (player, dealer);
@@ -46,7 +49,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 Message::HitMe => starting_players.1.add_to_hand(),
 
             }
+
         }
+
+        but_hit_me.show();
+        but_stay.show();
 
         if starting_players.1.hand_total_value > 21 {
     

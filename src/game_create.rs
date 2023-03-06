@@ -1,6 +1,9 @@
 use std::{io};
 
+use fltk::{button::Button, prelude::WidgetExt, app};
 use rand::Rng;
+
+use crate::Message;
 
 #[derive(Debug, Clone)]
 pub struct Player {
@@ -48,7 +51,7 @@ impl Player {
 
         self.hand = vec![];
         self.hand_total_value = 0;
-        
+
     }
 
 }
