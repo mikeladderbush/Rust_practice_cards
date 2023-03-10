@@ -2,13 +2,14 @@ use fltk::{app, window::Window, group::Pack, button::Button, prelude::{WidgetExt
 
 use crate::creation_tools::window_create::window_creation;
 
-use super::game_creation_tools::game_create::{Player};
+use super::game_creation_tools::game_create::{Player, save_file};
 
 #[derive(Debug, Clone, Copy)]
 pub enum Message {
 
     Stay,
     HitMe,
+    Save,
 
 }
 
@@ -21,6 +22,7 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
     pack.set_spacing(10);
     let mut but_stay = Button::default().with_size(100,40).with_label("I'll stay");
     let mut but_hit_me = Button::default().with_size(100, 40).with_label("Hit me!");
+    let mut but_save_profile = Button::default().with_size(100,40).with_label("Save Profile");
     pack.end();
     wind.end();
     wind.show();
@@ -29,6 +31,7 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
 
     but_stay.emit(s, Message::Stay);
     but_hit_me.emit(s, Message::HitMe);
+    but_save_profile.emit(s,Message::Save);
 
     let player = new_player;
     let dealer = new_dealer;
@@ -42,6 +45,7 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
 
                 Message::Stay => current_players.0.dealer_draw(),
                 Message::HitMe => current_players.1.add_to_hand(),
+                Message::Save => save_file(&current_players.1),
 
             }
 

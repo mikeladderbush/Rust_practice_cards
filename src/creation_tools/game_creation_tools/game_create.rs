@@ -1,4 +1,4 @@
-use std::{io};
+use std::{io::{self}, fs::{File, self}};
 use fltk::app::sleep;
 use rand::Rng;
 
@@ -203,6 +203,25 @@ pub fn create_game(){
     new_player.initialize_hand();
     new_player.subtract_wager();
     game_window_creation(new_player, new_dealer);
+
+}
+
+pub fn save_file(player: &Player) {
+
+    File::create("card_game_file.txt");
+    let player_name_string = &player.name;
+    let player_purse = player.purse.unwrap();
+    let player_purse_string = player_purse.to_string();
+    fs::write("card_game_file.txt", player_purse_string).expect("Unable to write file");
+    fs::write("card_game_file.txt", player_name_string).expect("Unable to write file");
+
+
+}
+
+pub fn use_file(){
+
+    let file = File::open("card_game_file.txt");
+    let contents = String::new();
 
 }
 
