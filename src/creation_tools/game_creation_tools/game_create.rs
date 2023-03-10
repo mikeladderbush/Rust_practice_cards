@@ -2,6 +2,8 @@ use std::{io};
 use fltk::app::sleep;
 use rand::Rng;
 
+use crate::creation_tools::game_window::game_window_creation;
+
 #[derive(Debug, Clone)]
 pub struct Player {
 
@@ -21,8 +23,16 @@ impl Player {
         self.hand_total_value = self.hand_total_value + &added_card.2;
         self.hand.push(added_card);
         
-        println!("{:?}", self);
+        if self.hand_total_value == 21{
 
+            println!("{:?}", self);
+            println!("You win!");
+
+        }else {
+
+            println!("{:?}", self);
+
+        }
     }
 
     pub fn subtract_wager(&mut self) -> i64{
@@ -148,7 +158,7 @@ pub fn create_card() -> (String, String, u32) {
 
 }
 
-pub fn create_game() -> (Player, Player){
+pub fn create_game(){
 
     let dealer_name = "Dealer".to_string();
 
@@ -160,7 +170,7 @@ pub fn create_game() -> (Player, Player){
     let mut wager = String::new();
     io::stdin().read_line(&mut wager).expect("failed to readline");
 
-    let mut dealer  = Player {
+    let mut new_dealer  = Player {
 
         hand: vec![],
         hand_total_value: 0,
@@ -170,7 +180,7 @@ pub fn create_game() -> (Player, Player){
     
     };
 
-    let mut player = Player {
+    let mut new_player = Player {
 
         hand: vec![],
         hand_total_value: 0,
@@ -180,15 +190,15 @@ pub fn create_game() -> (Player, Player){
 
     };
 
-    dealer.initialize_hand();
-    player.initialize_hand();
-    player.subtract_wager();
-    return (dealer, player);
+    new_dealer.initialize_hand();
+    new_player.initialize_hand();
+    new_player.subtract_wager();
+    game_window_creation(new_player, new_dealer);
 
 }
 
-pub fn compare_hands() {
+//pub fn compare_hands() {
 
     //todo to compare hand scores;
-    
-}
+
+//}

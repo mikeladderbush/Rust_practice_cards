@@ -1,5 +1,5 @@
 [package]
-name = "Rust_practice_cards"
+name = "rust_practice_cards"
 version = "0.1.0"
 edition = "2021"
 

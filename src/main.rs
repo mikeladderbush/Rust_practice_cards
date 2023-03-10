@@ -1,5 +1,4 @@
 use creation_tools::window_create;
-
 mod creation_tools;
 
 fn main() {
