@@ -1,5 +1,7 @@
 use fltk::{app, window::Window, group::Pack, button::Button, prelude::{WidgetExt, GroupExt}};
 
+use crate::creation_tools::window_create::window_creation;
+
 use super::game_creation_tools::game_create::{Player};
 
 #[derive(Debug, Clone, Copy)]
@@ -13,6 +15,7 @@ pub enum Message {
 pub fn game_window_creation(new_dealer:Player, new_player:Player){
 
     let app = app::App::default();
+    app.quit();
     let mut wind = Window::default().with_size(600, 200).with_label("Card Game");
     let mut pack = Pack::default().with_size(120, 140).center_of(&wind);
     pack.set_spacing(10);
@@ -49,14 +52,32 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
             println!("You busted");
             current_players.0.empty_hand();
             current_players.1.empty_hand();
+            wind.hide();
+            window_creation();
     
         } else if current_players.1.hand_total_value == 21 {
 
-            println!("You won!");
+            println!("lucky 21!");
             current_players.0.empty_hand();
             current_players.1.empty_hand();
             current_players.1.add_to_purse();
-            
+            wind.hide();
+
+        } else if current_players.0.hand_total_value == 21 {
+
+            println!("21....You lose");
+            current_players.0.empty_hand();
+            current_players.1.empty_hand();
+            wind.hide();
+
+        } else if current_players.0.hand_total_value > 21 {
+
+            println!("Dealer busts. You win!");
+            current_players.0.empty_hand();
+            current_players.1.empty_hand();
+            current_players.1.add_to_purse();
+            wind.hide();
+
         }
 
     }

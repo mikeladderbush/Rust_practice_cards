@@ -49,17 +49,8 @@ impl Player {
         let added_card = create_card();
         self.hand_total_value = self.hand_total_value + &added_card.2;
         self.hand.push(added_card);
+        println!("{:?}", self);
         
-        if self.hand_total_value == 21{
-
-            println!("{:?}", self);
-            println!("You win!");
-
-        }else {
-
-            println!("{:?}", self);
-
-        }
     }
 
     pub fn subtract_wager(&mut self) -> i64{
@@ -113,12 +104,6 @@ impl Player {
     pub fn dealer_draw(&mut self) {
 
         while self.hand_total_value < 21 {
-
-            if self.hand_total_value > 21 {
-            
-            println!("Dealer busts! Congrats");
-
-            }
 
             self.add_to_hand();
             print!("{:?}", self);
