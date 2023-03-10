@@ -16,6 +16,33 @@ pub struct Player {
 }
 
 impl Player {
+    
+    pub fn add_to_purse(&mut self) -> i64{
+
+        if self.wager.is_some() {
+
+            let wager = self.wager.unwrap();
+            
+            if self.purse.is_some() {
+
+                let mut purse = self.purse.unwrap();
+                purse = purse + wager;
+                purse
+
+            } else {
+                
+                let purse = self.purse.unwrap();
+                purse
+
+            }
+        
+        } else {
+            
+            let purse = self.purse.unwrap();
+            purse
+
+        }
+    }
 
     pub fn add_to_hand(&mut self){
     
@@ -85,7 +112,7 @@ impl Player {
 
     pub fn dealer_draw(&mut self) {
 
-        while self.hand_total_value < 16 {
+        while self.hand_total_value < 21 {
 
             if self.hand_total_value > 21 {
             
@@ -98,9 +125,6 @@ impl Player {
             sleep(3.0);
 
         }
-
-        print!("{:?}", self);
-        sleep(3.0);
 
     }
 
@@ -202,3 +226,5 @@ pub fn create_game(){
     //todo to compare hand scores;
 
 //}
+
+/* add option for window to close after busting and saving purse */

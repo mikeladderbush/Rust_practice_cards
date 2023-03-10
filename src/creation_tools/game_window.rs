@@ -50,6 +50,13 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
             current_players.0.empty_hand();
             current_players.1.empty_hand();
     
+        } else if current_players.1.hand_total_value == 21 {
+
+            println!("You won!");
+            current_players.0.empty_hand();
+            current_players.1.empty_hand();
+            current_players.1.add_to_purse();
+            
         }
 
     }
