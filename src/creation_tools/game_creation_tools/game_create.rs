@@ -1,4 +1,4 @@
-use std::{io::{self}, fs::{File, self}};
+use std::{io::{self, Write, BufReader, BufRead}, fs::{File, self}, path::{Path, PathBuf}, f32::consts::E};
 use fltk::app::sleep;
 use rand::Rng;
 
@@ -121,7 +121,6 @@ impl Default for Player {
     }
 }
 
-
 pub fn create_card() -> (String, String, u32) {
 
     let mut single_deck: Vec<(u32, &str)> =
@@ -167,17 +166,9 @@ pub fn create_card() -> (String, String, u32) {
 
 }
 
-pub fn create_game(){
+pub fn create_dealer() -> Player{
 
     let dealer_name = "Dealer".to_string();
-
-    println!("please enter a name for your player: ");
-    let mut player_name: String = String::new();
-    io::stdin().read_line(&mut player_name).expect("failed to readline");
-
-    println!("please enter your wager: ");
-    let mut wager = String::new();
-    io::stdin().read_line(&mut wager).expect("failed to readline");
 
     let mut new_dealer  = Player {
 
@@ -189,6 +180,20 @@ pub fn create_game(){
     
     };
 
+    return new_dealer
+
+}
+
+pub fn create_game(){
+
+    println!("please enter a name for your player: ");
+    let mut player_name: String = String::new();
+    io::stdin().read_line(&mut player_name).expect("failed to readline");
+
+    println!("please enter your wager: ");
+    let mut wager = String::new();
+    io::stdin().read_line(&mut wager).expect("failed to readline");
+
     let mut new_player = Player {
 
         hand: vec![],
@@ -199,6 +204,8 @@ pub fn create_game(){
 
     };
 
+    let mut new_dealer = create_dealer();
+
     new_dealer.initialize_hand();
     new_player.initialize_hand();
     new_player.subtract_wager();
@@ -208,20 +215,37 @@ pub fn create_game(){
 
 pub fn save_file(player: &Player) {
 
-    File::create("card_game_file.txt");
+    let mut file = File::create(r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file.txt").unwrap();
+    let mut fileTwo = File::create(r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file_purse.txt").unwrap();
     let player_name_string = &player.name;
     let player_purse = player.purse.unwrap();
     let player_purse_string = player_purse.to_string();
-    fs::write("card_game_file.txt", player_purse_string).expect("Unable to write file");
-    fs::write("card_game_file.txt", player_name_string).expect("Unable to write file");
-
+    file.write_all(player_name_string.as_bytes()).expect("write failed");
+    fileTwo.write_all(player_purse_string.as_bytes()).expect("write failed");
 
 }
 
-pub fn use_file(){
+pub fn use_file() {
 
-    let file = File::open("card_game_file.txt");
-    let contents = String::new();
+    let string_from_file = fs::read_to_string("card_game_file.txt").expect("Couldn't read");
+    let string_from_file_two = fs::read_to_string("card_game_file_purse.txt").expect("Couldn't read file");
+
+    let mut new_player = Player {
+
+        hand: vec![],
+        hand_total_value: 0,
+        wager: None,
+        name: string_from_file,
+        purse: Some(string_from_file_two.trim().parse().unwrap()),
+
+    }; 
+
+    let mut new_dealer = create_dealer();
+
+    new_dealer.initialize_hand();
+    new_player.initialize_hand();
+    new_player.subtract_wager();
+    game_window_creation(new_player, new_dealer);
 
 }
 
