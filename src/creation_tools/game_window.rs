@@ -1,7 +1,5 @@
 use fltk::{app, window::Window, group::Pack, button::Button, prelude::{WidgetExt, GroupExt}};
 
-use crate::creation_tools::window_create::window_creation;
-
 use super::game_creation_tools::game_create::{Player, save_file};
 
 #[derive(Debug, Clone, Copy)]
@@ -17,7 +15,7 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
 
     let app = app::App::default();
     app.quit();
-    let mut wind = Window::default().with_size(600, 200).with_label("Card Game");
+    let mut wind = Window::default().with_size(600, 300).with_label("Card Game");
     let mut pack = Pack::default().with_size(120, 140).center_of(&wind);
     pack.set_spacing(10);
     let mut but_stay = Button::default().with_size(100,40).with_label("I'll stay");
@@ -45,7 +43,7 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
 
                 Message::Stay => current_players.0.dealer_draw(),
                 Message::HitMe => current_players.1.add_to_hand(),
-                Message::Save => save_file(&current_players.1),
+                Message::Save => save_file(&current_players.1.name.to_owned(),&current_players.1.purse.to_owned()),
 
             }
 
@@ -56,8 +54,8 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
             println!("You busted");
             current_players.0.empty_hand();
             current_players.1.empty_hand();
-            wind.hide();
-            window_creation();
+            current_players.1.subtract_wager();
+            save_file(&current_players.1.name.to_owned(),&current_players.1.purse.to_owned());
     
         } else if current_players.1.hand_total_value == 21 {
 
@@ -65,14 +63,15 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
             current_players.0.empty_hand();
             current_players.1.empty_hand();
             current_players.1.add_to_purse();
-            wind.hide();
+            save_file(&current_players.1.name.to_owned(),&current_players.1.purse.to_owned());
 
         } else if current_players.0.hand_total_value == 21 {
 
             println!("21....You lose");
             current_players.0.empty_hand();
             current_players.1.empty_hand();
-            wind.hide();
+            current_players.1.subtract_wager();
+            save_file(&current_players.1.name.to_owned(),&current_players.1.purse.to_owned());
 
         } else if current_players.0.hand_total_value > 21 {
 
@@ -80,7 +79,7 @@ pub fn game_window_creation(new_dealer:Player, new_player:Player){
             current_players.0.empty_hand();
             current_players.1.empty_hand();
             current_players.1.add_to_purse();
-            wind.hide();
+            save_file(&current_players.1.name.to_owned(),&current_players.1.purse.to_owned());
 
         }
 

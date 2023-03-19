@@ -1,5 +1,4 @@
-use std::{io::{self, Write, BufReader, BufRead}, fs::{File, self}, path::{Path, PathBuf}, f32::consts::E};
-use fltk::app::sleep;
+use std::{io::{self, Write}, fs::{File, self}};
 use rand::Rng;
 
 use crate::creation_tools::game_window::game_window_creation;
@@ -106,8 +105,6 @@ impl Player {
         while self.hand_total_value < 21 {
 
             self.add_to_hand();
-            print!("{:?}", self);
-            sleep(3.0);
 
         }
 
@@ -170,7 +167,7 @@ pub fn create_dealer() -> Player{
 
     let dealer_name = "Dealer".to_string();
 
-    let mut new_dealer  = Player {
+    let new_dealer  = Player {
 
         hand: vec![],
         hand_total_value: 0,
@@ -213,18 +210,19 @@ pub fn create_game(){
 
 }
 
-pub fn save_file(player: &Player) {
+pub fn save_file(name: &String, purse: &Option<i64>) {
 
     let mut file = File::create(r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file.txt").unwrap();
-    let mut fileTwo = File::create(r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file_purse.txt").unwrap();
-    let player_name_string = &player.name;
-    let player_purse = player.purse.unwrap();
+    let mut file_two = File::create(r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file_purse.txt").unwrap();
+    let player_name_string = name;
+    let player_purse = purse.unwrap();
     let player_purse_string = player_purse.to_string();
     file.write_all(player_name_string.as_bytes()).expect("write failed");
-    fileTwo.write_all(player_purse_string.as_bytes()).expect("write failed");
+    file_two.write_all(player_purse_string.as_bytes()).expect("write failed");
 
 }
 
+//set up file to be used for continuing games and loading old ones.
 pub fn use_file() {
 
     let string_from_file = fs::read_to_string("card_game_file.txt").expect("Couldn't read");
@@ -248,11 +246,3 @@ pub fn use_file() {
     game_window_creation(new_player, new_dealer);
 
 }
-
-//pub fn compare_hands() {
-
-    //todo to compare hand scores;
-
-//}
-
-/* add option for window to close after busting and saving purse */
