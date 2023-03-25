@@ -6,7 +6,7 @@ use fltk::{
     window::Window,
 };
 
-use super::game_creation_tools::game_create::{save_file, Player};
+use super::game_creation_tools::{player::Player, file_manager::save_file};
 
 #[derive(Debug, Clone, Copy)]
 pub enum Message {

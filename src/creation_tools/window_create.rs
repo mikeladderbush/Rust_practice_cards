@@ -4,21 +4,18 @@ use fltk::{
     group::Pack,
     prelude::{GroupExt, WidgetExt},
     window::Window,
-    input::Input,
 };
 
-use super::game_creation_tools::game_create::{create_game, use_file};
+use std::rc::Rc;
+use std::{cell::RefCell, time::Instant};
+
+use super::game_creation_tools::{file_manager::use_file, game_create::create_game};
 
 #[derive(Debug, Clone, Copy)]
 pub enum Message {
     Start,
     Load,
 }
-/*pub struct TextInput {
-    inner: *mut Fl_Input,
-    tracker: *mut fltk_sys::fl::Fl_Widget_Tracker,
-    is_derived: bool,
-}*/
 
 pub fn window_creation() {
     let app = app::App::default();
