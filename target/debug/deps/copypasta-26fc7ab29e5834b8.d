@@ -1,0 +1,10 @@
+C:\Users\Michael Ladderbush\Desktop\Rust\Rust_practice_cards\target\debug\deps\copypasta-26fc7ab29e5834b8.rmeta: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\common.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\windows_clipboard.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\nop_clipboard.rs
+
+C:\Users\Michael Ladderbush\Desktop\Rust\Rust_practice_cards\target\debug\deps\libcopypasta-26fc7ab29e5834b8.rlib: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\common.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\windows_clipboard.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\nop_clipboard.rs
+
+C:\Users\Michael Ladderbush\Desktop\Rust\Rust_practice_cards\target\debug\deps\copypasta-26fc7ab29e5834b8.d: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\common.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\windows_clipboard.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\nop_clipboard.rs
+
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\lib.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\common.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\windows_clipboard.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\copypasta-0.7.1\src\nop_clipboard.rs:

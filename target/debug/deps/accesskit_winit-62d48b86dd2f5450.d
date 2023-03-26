@@ -1,0 +1,9 @@
+C:\Users\Michael Ladderbush\Desktop\Rust\Rust_practice_cards\target\debug\deps\accesskit_winit-62d48b86dd2f5450.rmeta: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\platform_impl\mod.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\platform_impl\windows.rs
+
+C:\Users\Michael Ladderbush\Desktop\Rust\Rust_practice_cards\target\debug\deps\libaccesskit_winit-62d48b86dd2f5450.rlib: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\platform_impl\mod.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\platform_impl\windows.rs
+
+C:\Users\Michael Ladderbush\Desktop\Rust\Rust_practice_cards\target\debug\deps\accesskit_winit-62d48b86dd2f5450.d: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\platform_impl\mod.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\platform_impl\windows.rs
+
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\lib.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\platform_impl\mod.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\accesskit_winit-0.10.0\src\platform_impl\windows.rs:
