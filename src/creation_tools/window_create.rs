@@ -6,17 +6,42 @@ use fltk::{
     window::Window,
 };
 
-use std::rc::Rc;
-use std::{cell::RefCell, time::Instant};
-
 use super::game_creation_tools::{file_manager::use_file, game_create::create_game};
 
 #[derive(Debug, Clone, Copy)]
-pub enum Message {
+pub enum Start_Message {
     Start,
     Load,
 }
 
+#[derive(Debug, Clone, Copy)]
+pub enum Profile_Message {
+    Enter,
+}
+
+//next steps are to replace normal ftlk with egui so we can use string input.
+pub fn create_profile() {
+    let profile_app = app::App::default();
+    let mut profile_window = Window::default().with_size(600, 200).with_label("Profile");
+    let mut pack = Pack::default()
+        .with_size(120, 140)
+        .center_of(&profile_window);
+    let mut but_enter = Button::default().with_size(200, 20).with_label("Enter");
+    pack.end();
+    profile_window.end();
+    profile_window.show();
+    let (s, r) = app::channel::<Profile_Message>();
+
+    but_enter.emit(s, Profile_Message::Enter);
+
+    while profile_app.wait() {
+        if let Some(msg) = r.recv() {
+            match msg {
+                Profile_Message::Enter => create_game(),
+            }
+        }
+    }
+}
 pub fn window_creation() {
     let app = app::App::default();
     let mut wind = Window::default()
@@ -34,16 +59,16 @@ pub fn window_creation() {
     wind.end();
     wind.show();
 
-    let (s, r) = app::channel::<Message>();
+    let (s, r) = app::channel::<Start_Message>();
 
-    but_start.emit(s, Message::Start);
-    but_load_profile.emit(s, Message::Load);
+    but_start.emit(s, Start_Message::Start);
+    but_load_profile.emit(s, Start_Message::Load);
 
     while app.wait() {
         if let Some(msg) = r.recv() {
             match msg {
-                Message::Start => create_game(),
-                Message::Load => use_file(),
+                Start_Message::Start => create_game(),
+                Start_Message::Load => use_file(),
             }
         }
     }
