@@ -45,5 +45,5 @@ pub fn use_file() {
     new_dealer.initialize_hand();
     new_player.initialize_hand();
     new_player.subtract_wager();
-    game_window_creation(new_player, new_dealer);
+    game_window_creation();
 }

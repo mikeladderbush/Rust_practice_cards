@@ -1,27 +1,24 @@
-//use creation_tools::window_create;
-use eframe::{
-    egui::{CentralPanel, Ui},
-    epi::App,
-    run_native, NativeOptions,
-};
-//mod creation_tools;
+use macroquad::prelude::*;
 
-struct CardGame;
+#[macroquad::main("Card Game")]
+async fn main() {
+    let mut profile_name: String = "Enter profile name here".to_string();
+    loop {
+        clear_background(BLACK);
 
-impl App for CardGame {
-    fn update(&mut self, ctx: &eframe::egui::CtxRef, frame: &mut eframe::epi::Frame) {
-        CentralPanel::default().show(ctx, |ui: &mut Ui| {
-            ui.label("Card Game");
+        egui_macroquad::ui(|egui_ctx| {
+            egui_macroquad::egui::Window::new("Card Game Start Screen").show(egui_ctx, |ui| {
+                ui.colored_label(egui_macroquad::egui::Color32::WHITE, "Test");
+                ui.add(
+                    egui_macroquad::egui::TextEdit::singleline(&mut profile_name)
+                        .text_color(egui_macroquad::egui::Color32::RED),
+                );
+                if ui.input(|i| i.key_pressed(egui::Key::Enter)) {
+                    print!("{}", profile_name);
+                }
+            });
         });
+        egui_macroquad::draw();
+        next_frame().await
     }
-
-    fn name(&self) -> &str {
-        "Card Game"
-    }
-}
-
-fn main() {
-    let app: CardGame = CardGame;
-    let win_options = NativeOptions::default();
-    run_native(Box::new(app), win_options);
 }

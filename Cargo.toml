@@ -8,4 +8,7 @@ edition = "2021"
 [dependencies]
 
 rand = "0.8.4"
-eframe = "0.14.0"
+egui = "0.21.0"
+egui-miniquad = "0.14.0"
+macroquad = "0.3.25"
+egui-macroquad = "0.15.0"

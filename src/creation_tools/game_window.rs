@@ -1,17 +1,10 @@
-use super::game_creation_tools::{file_manager::save_file, player::Player};
+use super::game_creation_tools::{file_manager::save_file, player::Player, game_create::{create_dealer, create_game}};
 
-pub fn game_window_creation(new_dealer: Player, new_player: Player) {
-    let player = new_player;
-    let dealer = new_dealer;
+pub fn game_window_creation() {
+    let player: Player = Default::default();
+    let dealer: Player = create_dealer();
     let mut current_players: (Player, Player) = (player, dealer);
-
-    /*Message::Stay => current_players.0.dealer_draw(),
-    Message::HitMe => current_players.1.add_to_hand(),
-    Message::Save => save_file(
-                &current_players.1.name.to_owned(),
-                &current_players.1.purse.to_owned(),
-            )
-    */
+    create_game();
 
     if current_players.1.hand_total_value > 21 {
         println!("You busted");
