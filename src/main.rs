@@ -1,4 +1,6 @@
 use macroquad::prelude::*;
+mod creation_tools;
+use creation_tools::game_window::{self, game_window_creation};
 
 #[macroquad::main("Card Game")]
 async fn main() {
@@ -14,7 +16,8 @@ async fn main() {
                         .text_color(egui_macroquad::egui::Color32::RED),
                 );
                 if ui.input(|i| i.key_pressed(egui::Key::Enter)) {
-                    print!("{}", profile_name);
+                    game_window_creation();
+                    //send profile name to new window that will use the name. if the name is in a saved file it will load that profile.
                 }
             });
         });
