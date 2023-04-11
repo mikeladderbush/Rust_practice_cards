@@ -1,5 +1,9 @@
 mod creation_tools;
 use creation_tools::game_window::{self, game_window_creation};
+use bevy::{
+    diagnostic::{Diagnostics, FrameTimeDiagnosticsPlugin},
+    prelude::*,
+};
 
 fn main() {
     App::new()
