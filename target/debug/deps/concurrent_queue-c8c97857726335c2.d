@@ -1,0 +1,9 @@
+c:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\target\debug\deps\concurrent_queue-c8c97857726335c2.rmeta: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\bounded.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\single.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\unbounded.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\sync.rs
+
+c:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\target\debug\deps\concurrent_queue-c8c97857726335c2.d: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\bounded.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\single.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\unbounded.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\sync.rs
+
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\lib.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\bounded.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\single.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\unbounded.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\concurrent-queue-2.2.0\src\sync.rs:
