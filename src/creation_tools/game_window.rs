@@ -1,18 +1,7 @@
 use super::game_creation_tools::{file_manager::save_file, player::Player, game_create::{create_dealer, create_game}};
 use macroquad::prelude::*;
 
-pub async fn game_window_creation() {
-
-    clear_background(BLACK);
-
-    egui_macroquad::ui(|egui_ctx| {
-
-        egui_macroquad::egui::Window::new("Card Game").show(egui_ctx, |ui| {
-            ui.colored_label(egui_macroquad::egui::Color32::WHITE, "Hello");
-        });
-    });
-    egui_macroquad::draw();
-    next_frame().await;
+pub fn game_window_creation() {
 
     let player: Player = Default::default();
     let dealer: Player = create_dealer();
