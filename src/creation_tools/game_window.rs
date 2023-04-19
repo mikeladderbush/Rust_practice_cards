@@ -63,6 +63,7 @@ pub fn game_window_creation(new_dealer: Player, new_player: Player) {
                 &current_players.1.name.to_owned(),
                 &current_players.1.purse.to_owned(),
             );
+            app.quit();
         } else if current_players.1.hand_total_value == 21 {
             println!("lucky 21!");
             current_players.0.empty_hand();
@@ -72,6 +73,7 @@ pub fn game_window_creation(new_dealer: Player, new_player: Player) {
                 &current_players.1.name.to_owned(),
                 &current_players.1.purse.to_owned(),
             );
+            app.quit();
         } else if current_players.0.hand_total_value == 21 {
             println!("21....You lose");
             current_players.0.empty_hand();
@@ -81,6 +83,7 @@ pub fn game_window_creation(new_dealer: Player, new_player: Player) {
                 &current_players.1.name.to_owned(),
                 &current_players.1.purse.to_owned(),
             );
+            app.quit();
         } else if current_players.0.hand_total_value > 21 {
             println!("Dealer busts. You win!");
             current_players.0.empty_hand();
@@ -90,6 +93,7 @@ pub fn game_window_creation(new_dealer: Player, new_player: Player) {
                 &current_players.1.name.to_owned(),
                 &current_players.1.purse.to_owned(),
             );
+            app.quit();
         }
     }
 }

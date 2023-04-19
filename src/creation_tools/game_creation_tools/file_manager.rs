@@ -1,6 +1,6 @@
 use std::{
-    fs::{self, File},
-    io::Write,
+    fs::{self, read, File, OpenOptions},
+    io::{prelude::*, BufReader, Read, Write},
 };
 
 use crate::creation_tools::game_window::game_window_creation;
@@ -8,17 +8,24 @@ use crate::creation_tools::game_window::game_window_creation;
 use super::{game_create::create_dealer, player::Player};
 
 pub fn save_file(name: &String, purse: &Option<i64>) {
-    let mut file = File::create(
-        r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file.txt",
-    )
+    let mut file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .open(r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file.txt")
+        .unwrap();
+
+    let mut file_two = OpenOptions::new()
+    .read(true)
+    .write(true)
+    .create(true)
+    .open(r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file_purse.txt")
     .unwrap();
-    let mut file_two = File::create(
-        r"C:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\card_game_file_purse.txt",
-    )
-    .unwrap();
+
     let player_name_string = name;
     let player_purse = purse.unwrap();
     let player_purse_string = player_purse.to_string();
+
     file.write_all(player_name_string.as_bytes())
         .expect("write failed");
     file_two
@@ -44,6 +51,5 @@ pub fn use_file() {
 
     new_dealer.initialize_hand();
     new_player.initialize_hand();
-    new_player.subtract_wager();
     game_window_creation(new_player, new_dealer);
 }
