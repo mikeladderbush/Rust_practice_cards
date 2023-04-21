@@ -1,0 +1,8 @@
+c:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\Rust_practice_cards\target\debug\deps\gloo_storage-62f37a55ce282759.rmeta: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\errors.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\local_storage.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\session_storage.rs
+
+c:\Users\Michael Ladderbush\Desktop\Rust\rust_practice_cards\Rust_practice_cards\target\debug\deps\gloo_storage-62f37a55ce282759.d: C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\lib.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\errors.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\local_storage.rs C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\session_storage.rs
+
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\lib.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\errors.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\local_storage.rs:
+C:\Users\Michael\ Ladderbush\.cargo\registry\src\github.com-1ecc6299db9ec823\gloo-storage-0.2.2\src\session_storage.rs:

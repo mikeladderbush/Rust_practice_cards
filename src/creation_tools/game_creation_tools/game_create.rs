@@ -1,10 +1,9 @@
-use rand::Rng;
+/* 
 use std::{
-    fs::{self, File},
-    io::{self, Write},
+    io::{self},
 };
 
-use crate::creation_tools::game_window::game_window_creation;
+use crate::creation_tools::game_creation_tools::game_create;
 
 use super::player::Player;
 
@@ -129,5 +128,6 @@ pub fn create_game() {
     new_dealer.initialize_hand();
     new_player.initialize_hand();
     new_player.subtract_wager();
-    game_window_creation(new_player, new_dealer);
+    game_creation(new_player, new_dealer);
 }
+*/
