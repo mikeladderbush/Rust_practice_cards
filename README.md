@@ -6,6 +6,8 @@ want to be able to play around with anything that comes to mind. This will proba
 remain private as well but if anyone does end up reading this please keep in mind
 I am very much a beginner and the goal here is education over anything else.
 
+Stopping work on this version, taking what I've learned and going to remake make in 2.0.
+
 
 Michael Ladderbush
 2023
